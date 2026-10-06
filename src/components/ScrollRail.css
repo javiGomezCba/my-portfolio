@@ -1,0 +1,156 @@
+.scroll-rail {
+  color: var(--text-muted);
+  height: 75vh;
+  max-height: calc(100vh - 32px);
+  min-height: min(420px, 75vh);
+  position: fixed;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  z-index: 10;
+}
+
+.scroll-rail ul {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.scroll-rail li {
+  height: 32px;
+  width: 32px;
+}
+
+.scroll-rail::before,
+.scroll-rail-progress {
+  left: 15px;
+  position: absolute;
+  top: 16px;
+  width: 1px;
+}
+
+.scroll-rail::before {
+  background: var(--border);
+  bottom: 16px;
+  content: "";
+}
+
+.scroll-rail-progress {
+  background: var(--accent);
+  height: calc(100% - 32px);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 220ms ease;
+}
+
+.scroll-rail-progress-1 {
+  transform: scaleY(.3333);
+}
+
+.scroll-rail-progress-2 {
+  transform: scaleY(.6667);
+}
+
+.scroll-rail-progress-3 {
+  transform: scaleY(1);
+}
+
+.scroll-rail-link {
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--text-muted);
+  display: flex;
+  height: 32px;
+  justify-content: center;
+  position: relative;
+  transition: border-color 160ms ease, color 160ms ease, background-color 160ms ease;
+  width: 32px;
+}
+
+.scroll-rail-link svg {
+  height: 14px;
+  width: 14px;
+}
+
+.scroll-rail-link:hover {
+  border-color: var(--text-muted);
+  color: var(--text);
+}
+
+.scroll-rail-link.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--background);
+}
+
+.scroll-rail-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.scroll-rail-tooltip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: .72rem;
+  left: auto;
+  opacity: 0;
+  padding: .4rem .55rem;
+  pointer-events: none;
+  position: absolute;
+  right: calc(100% + .65rem);
+  top: 50%;
+  transform: translate(3px, -50%);
+  transition: opacity 140ms ease, transform 140ms ease;
+  white-space: nowrap;
+  visibility: hidden;
+}
+
+.scroll-rail-link:hover .scroll-rail-tooltip,
+.scroll-rail-link:focus-visible .scroll-rail-tooltip {
+  opacity: 1;
+  transform: translate(0, -50%);
+  visibility: visible;
+}
+
+.scroll-section-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 600ms cubic-bezier(.22, .61, .36, 1),
+    transform 600ms cubic-bezier(.22, .61, .36, 1);
+}
+
+.scroll-section-reveal.scroll-section-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 1279.98px) {
+  .scroll-rail {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-rail-progress,
+  .scroll-rail-link,
+  .scroll-rail-tooltip {
+    transition: none;
+  }
+
+  .scroll-section-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

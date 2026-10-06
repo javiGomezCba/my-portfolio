@@ -1,0 +1,195 @@
+.navbar {
+  background-color: rgb(10 11 13 / 34%);
+  border-bottom: 1px solid transparent;
+  left: 0;
+  padding: 0 var(--page-gutter);
+  position: fixed;
+  right: 0;
+  top: 0;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  transition: background-color 240ms ease, border-color 240ms ease, -webkit-backdrop-filter 240ms ease, backdrop-filter 240ms ease;
+  z-index: 20;
+}
+
+.navbar-scrolled {
+  background-color: rgb(10 11 13 / 76%);
+  border-bottom-color: rgb(255 255 255 / 8%);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.navbar-inner {
+  align-items: center;
+  display: flex;
+  height: 76px;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: var(--container);
+}
+
+.navbar-logo {
+  align-items: center;
+  color: var(--text);
+  display: inline-flex;
+  flex: 0 0 40px;
+  height: 40px;
+  justify-content: center;
+  width: 40px;
+}
+
+.navbar-logo img {
+  display: block;
+  height: 100%;
+  object-fit: contain;
+  width: 100%;
+}
+
+.navbar-logo:focus-visible,
+.navbar-links a:focus-visible,
+.navbar-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
+}
+
+.navbar-links {
+  align-items: center;
+  display: flex;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.navbar-links a {
+  color: var(--text-muted);
+  font-size: .875rem;
+  transition: color 160ms ease;
+}
+
+.navbar-links a:hover {
+  color: var(--accent);
+}
+
+.navbar-links .navbar-cv {
+  border: 1px solid rgb(255 219 42 / 42%);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  min-height: 42px;
+  padding: .65rem .85rem;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.navbar-links .navbar-cv:hover {
+  background: rgb(255 219 42 / 8%);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.navbar-toggle {
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  cursor: pointer;
+  display: none;
+  height: 42px;
+  justify-content: center;
+  padding: 0;
+  width: 42px;
+}
+
+.navbar-toggle span {
+  background: currentColor;
+  height: 1px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transition: transform 160ms ease;
+  width: 17px;
+}
+
+.navbar-toggle span:first-child {
+  transform: translate(-50%, calc(-50% - 3px));
+}
+
+.navbar-toggle span:last-child {
+  transform: translate(-50%, calc(-50% + 3px));
+}
+
+.navbar-toggle.is-open span:first-child {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.navbar-toggle.is-open span:last-child {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+@media (max-width: 640px) {
+  .navbar-inner {
+    height: 68px;
+  }
+
+  .navbar-toggle {
+    display: inline-flex;
+    position: relative;
+  }
+
+  .navbar-links {
+    align-items: stretch;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    left: var(--page-gutter);
+    opacity: 0;
+    padding: .4rem 1rem;
+    pointer-events: none;
+    position: absolute;
+    right: var(--page-gutter);
+    top: calc(100% + .5rem);
+    transform: translateY(-.35rem);
+    transition: opacity 160ms ease, transform 160ms ease;
+    visibility: hidden;
+  }
+
+  .navbar-links-open {
+    background: var(--surface);
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  .navbar-links a {
+    padding: .9rem .25rem;
+  }
+
+  .navbar-links a + a {
+    border-top: 1px solid var(--border);
+  }
+
+  .navbar-links .navbar-cv {
+    align-items: center;
+    border: 0;
+    border-radius: 0;
+    display: flex;
+    min-height: 48px;
+    padding: .9rem .25rem;
+  }
+
+  .navbar-links a.navbar-cv {
+    border-top: 1px solid var(--border);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar,
+  .navbar-scrolled,
+  .navbar-links,
+  .navbar-links a,
+  .navbar-links .navbar-cv,
+  .navbar-toggle span {
+    transition: none;
+  }
+}
