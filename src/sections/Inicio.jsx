@@ -1,9 +1,76 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import portfolioData from "../data/portfolioData";
+
+const roleTitles = [
+  "Desarrollo frontend",
+  "Interfaces con React",
+  "Diseño de interfaces",
+  "Integración de servicios",
+];
 
 export default function Inicio() {
   const heroRef = useRef(null);
   const primaryCtaRef = useRef(null);
+  const [typedTitle, setTypedTitle] = useState(roleTitles[0]);
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let roleIndex = 0;
+    let characterIndex = roleTitles[0].length;
+    let deleting = true;
+    let timeoutId;
+
+    const animateTitle = () => {
+      if (reducedMotion.matches) {
+        setTypedTitle(roleTitles[0]);
+        return;
+      }
+
+      const currentTitle = roleTitles[roleIndex];
+      if (deleting) {
+        characterIndex = Math.max(0, characterIndex - 1);
+        setTypedTitle(currentTitle.slice(0, characterIndex));
+
+        if (characterIndex === 0) {
+          deleting = false;
+          roleIndex = (roleIndex + 1) % roleTitles.length;
+          timeoutId = window.setTimeout(animateTitle, 420);
+          return;
+        }
+
+        timeoutId = window.setTimeout(animateTitle, 42);
+        return;
+      }
+
+      characterIndex = Math.min(currentTitle.length, characterIndex + 1);
+      setTypedTitle(currentTitle.slice(0, characterIndex));
+      if (characterIndex === currentTitle.length) {
+        deleting = true;
+        timeoutId = window.setTimeout(animateTitle, 1500);
+        return;
+      }
+
+      timeoutId = window.setTimeout(animateTitle, 72);
+    };
+
+    const resetTitle = () => {
+      window.clearTimeout(timeoutId);
+      roleIndex = 0;
+      characterIndex = roleTitles[0].length;
+      deleting = true;
+      setTypedTitle(roleTitles[0]);
+      if (!reducedMotion.matches) {
+        timeoutId = window.setTimeout(animateTitle, 1500);
+      }
+    };
+
+    resetTitle();
+    reducedMotion.addEventListener("change", resetTitle);
+    return () => {
+      window.clearTimeout(timeoutId);
+      reducedMotion.removeEventListener("change", resetTitle);
+    };
+  }, []);
 
   useEffect(() => {
     const hero = heroRef.current;
@@ -125,17 +192,16 @@ export default function Inicio() {
   return (
     <section id="inicio" className="hero section" aria-labelledby="hero-title" ref={heroRef}>
       <div className="hero-content">
-        <p className="hero-name hero-reveal" style={{ "--hero-reveal-delay": "0ms" }}>
+        <h1 className="hero-name hero-reveal" id="hero-title" style={{ "--hero-reveal-delay": "0ms" }}>
           {portfolioData.personal.name}
-        </p>
-        <h1 className="hero-reveal" id="hero-title" style={{ "--hero-reveal-delay": "65ms" }}>
-          <span>Frontend</span>
-          <span>Developer</span>
         </h1>
+        <p className="hero-role hero-reveal" style={{ "--hero-reveal-delay": "65ms" }}>
+          <span className="hero-role-accessible">Desarrollador frontend</span>
+          <span aria-hidden="true" className="hero-role-typed">{typedTitle}</span>
+        </p>
         <p className="hero-copy hero-reveal" style={{ "--hero-reveal-delay": "130ms" }}>
-          Desarrollo aplicaciones web con foco en frontend, integrando interfaces,
-          lógica de aplicación y servicios para construir productos funcionales y
-          mantenibles.
+          Construyo interfaces web claras y las conecto con la lógica y los servicios
+          que necesita cada producto.
         </p>
         <div className="hero-actions">
           <a
@@ -154,17 +220,19 @@ export default function Inicio() {
             Hablemos <span aria-hidden="true">→</span>
           </a>
         </div>
-        <a
-          className="hero-cv-link hero-reveal"
-          download="Nicolas-Gomez-CV.pdf"
-          href="/CV_Nicolas.pdf"
-          style={{ "--hero-reveal-delay": "325ms" }}
-        >
-          <svg aria-hidden="true" fill="none" viewBox="0 0 16 16">
-            <path d="M8 1.75v8.5m0 0 3-3m-3 3-3-3M2.75 10.5v2.75h10.5V10.5" />
-          </svg>
-          <span>Descargar CV</span>
-        </a>
+        <nav className="hero-socials hero-reveal" aria-label="Perfiles sociales" style={{ "--hero-reveal-delay": "325ms" }}>
+          <a aria-label="GitHub" href="https://github.com/javiGomezCba" rel="noopener noreferrer" target="_blank">
+            <i aria-hidden="true" className="fa-brands fa-github" />
+          </a>
+          <a
+            aria-label="LinkedIn"
+            href="https://www.linkedin.com/in/nicolas-gomez-cordoba/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <i aria-hidden="true" className="fa-brands fa-linkedin-in" />
+          </a>
+        </nav>
         <div className="hero-meta">
           <p className="hero-availability hero-reveal" style={{ "--hero-reveal-delay": "390ms" }}>
             <span className="status-dot" aria-hidden="true" />

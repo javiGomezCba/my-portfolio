@@ -50,12 +50,12 @@ export function createApp({
       limit: 5,
       standardHeaders: "draft-8",
       legacyHeaders: false,
-      message: { ok: false, message: "Demasiadas solicitudes. Intenta nuevamente más tarde." },
+      message: { ok: false, message: "Demasiadas solicitudes. Probá de nuevo más tarde." },
     }),
     async (request, response) => {
       const body = request.body;
       if (!body || typeof body !== "object" || Array.isArray(body)) {
-        return response.status(400).json({ ok: false, message: "Completa los campos requeridos." });
+        return response.status(400).json({ ok: false, message: "Completá los campos requeridos." });
       }
 
       if (typeof body.website === "string" && body.website.trim()) {
@@ -78,7 +78,7 @@ export function createApp({
       ) {
         return response.status(400).json({
           ok: false,
-          message: "Revisa el nombre, el formato del email y la longitud del mensaje.",
+          message: "Revisá el nombre, el formato del correo y el largo del mensaje.",
         });
       }
 
@@ -99,7 +99,7 @@ export function createApp({
         );
         return response.status(502).json({
           ok: false,
-          message: "No pudimos enviar el mensaje. Inténtalo nuevamente más tarde.",
+          message: "No pudimos enviar el mensaje. Probá de nuevo más tarde.",
         });
       }
     },

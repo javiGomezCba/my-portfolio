@@ -69,11 +69,11 @@ export default function Proyectos() {
                   <dd>{project.role}</dd>
                 </div>
                 <div>
-                  <dt>Focus</dt>
+                  <dt>Enfoque</dt>
                   <dd>{project.focus}</dd>
                 </div>
                 <div>
-                  <dt>Stack</dt>
+                  <dt>Tecnologías</dt>
                   <dd>{project.technologies.join(" · ")}</dd>
                 </div>
               </dl>
@@ -87,12 +87,6 @@ export default function Proyectos() {
                 <ul>
                   {project.technicalDecisions.map((decision) => <li key={decision}>{decision}</li>)}
                 </ul>
-                {project.architecture && (
-                  <p className="project-architecture">
-                    <span>Flujo de datos</span>
-                    <code>{project.architecture}</code>
-                  </p>
-                )}
               </section>
 
               <div className="project-links">

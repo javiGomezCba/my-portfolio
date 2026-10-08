@@ -15,13 +15,12 @@
   padding-bottom: 2rem;
 }
 
-.skills-heading h2 {
-  font-family: var(--font-display);
+.skills-section .skills-heading h2 {
+  font-family: var(--font-heading);
   font-size: clamp(3rem, 7vw, 5.5rem);
   letter-spacing: -.075em;
   line-height: .95;
   margin: 0;
-  text-transform: uppercase;
 }
 
 .skills-intro {
@@ -36,7 +35,7 @@
   column-gap: clamp(2rem, 5vw, 5rem);
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  row-gap: clamp(3.25rem, 6vw, 5rem);
+  row-gap: clamp(2.5rem, 4vw, 3.5rem);
 }
 
 .skill-group {
@@ -99,6 +98,10 @@
   padding: 0;
 }
 
+.skill-group-frontend .skill-list {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
 .skill-item {
   align-items: center;
   border-top: 1px solid rgb(255 255 255 / 7%);
@@ -119,13 +122,12 @@
   color: var(--text);
   flex: 0 0 1.7rem;
   height: 1.7rem;
-  transition: color 180ms ease, transform 180ms ease;
+  transition: color 180ms ease;
   width: 1.7rem;
 }
 
 .skill-item:hover .skill-icon {
   color: var(--accent);
-  transform: translateY(-2px);
 }
 
 .skill-icon-react { color: #61dafb; }
@@ -149,24 +151,14 @@
   font-size: .82rem;
   line-height: 1.35;
   overflow-wrap: anywhere;
-  transition: transform 180ms ease;
 }
 
-.skill-item:hover > span {
-  transform: translateX(2px);
+.skill-group-backend .skill-list {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.skill-group-backend .skill-list,
 .skill-group-tools .skill-list {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.skill-group-tools .skill-item:last-child {
-  grid-column: 1 / -1;
-}
-
-.skill-group-tools .skill-item:last-child > span {
-  font-size: .74rem;
 }
 
 .practice-list {
@@ -209,12 +201,22 @@
   overflow-wrap: anywhere;
 }
 
+@media (max-width: 1099px) {
+  .skill-group-frontend .skill-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 899px) {
   .skills-grid {
     column-gap: 2rem;
   }
 
   .skill-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .skill-group-frontend .skill-list {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
@@ -252,7 +254,7 @@
 
   .skills-grid {
     grid-template-columns: minmax(0, 1fr);
-    row-gap: 3rem;
+    row-gap: 2.5rem;
   }
 
   .skill-group,
@@ -266,6 +268,10 @@
   }
 
   .skill-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .skill-group-frontend .skill-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 

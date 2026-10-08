@@ -7,6 +7,7 @@ import Proyectos from "./sections/Proyectos";
 import Habilidades from "./sections/Habilidades";
 import Contacto from "./sections/Contacto";
 import ScrollRail from "./components/ScrollRail";
+import AmbientParticles from "./components/AmbientParticles";
 import "./index.css";
 
 const headingAlignedSections = new Set(["sobremi", "proyectos", "habilidades"]);
@@ -50,6 +51,7 @@ export default function App() {
 
   return (
     <>
+      <AmbientParticles />
       <Navbar />
       <ScrollRail />
       <Inicio />

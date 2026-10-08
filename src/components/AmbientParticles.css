@@ -1,0 +1,115 @@
+.ambient-particles {
+  height: 100%;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: fixed;
+  width: 100%;
+  z-index: 0;
+}
+
+.ambient-particles::before {
+  background:
+    radial-gradient(ellipse at 60% 42%, rgba(93, 128, 255, 0.639), transparent 55%),
+    radial-gradient(ellipse at 77% 59%, rgba(155, 119, 255, 0.59), transparent 52%),
+    radial-gradient(ellipse at 86% 30%, rgb(99, 211, 255), transparent 48%);
+  content: "";
+  filter: blur(42px);
+  inset: 4% -8% 8% 42%;
+  opacity: .8;
+  position: absolute;
+}
+
+.ambient-network {
+  height: 100%;
+  inset: 0;
+  overflow: visible;
+  position: absolute;
+  width: 100%;
+}
+
+.ambient-connection {
+  animation: ambient-connection-pulse 4s ease-in-out infinite alternate;
+  fill: none;
+  stroke-width: .9px;
+}
+
+.ambient-connection-blue { stroke: rgb(112 151 255 / 28%); }
+.ambient-connection-cyan { stroke: rgb(21 187 242 / 26%); }
+.ambient-connection-violet { stroke: rgb(183 147 255 / 26%); }
+
+.ambient-particle {
+  animation:
+    ambient-particle-drift var(--particle-drift-duration, 20s) ease-in-out var(--particle-drift-delay, 0s) infinite alternate,
+    ambient-particle-sparkle var(--particle-sparkle-duration, 5s) ease-in-out var(--particle-sparkle-delay, 0s) infinite;
+  border-radius: 50%;
+  filter: blur(.2px);
+  left: 0;
+  position: absolute;
+  top: 0;
+  translate: -50% -50%;
+}
+
+.ambient-particle-blue {
+  background: rgb(4, 61, 174);
+  box-shadow: 0 0 9px 2px rgb(91 139 255 / 58%);
+  opacity: .9;
+}
+
+.ambient-particle-cyan {
+  background: #66dbff;
+  box-shadow: 0 0 9px 2px rgb(60 202 255 / 55%);
+  opacity: .88;
+}
+
+.ambient-particle-violet {
+  background: #ae8aff;
+  box-shadow: 0 0 9px 2px rgb(151 104 255 / 54%);
+  opacity: .86;
+}
+
+@keyframes ambient-particle-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(var(--particle-drift-x), var(--particle-drift-y), 0);
+  }
+}
+
+@keyframes ambient-particle-sparkle {
+  0%, 100% {
+    filter: blur(.2px) brightness(1);
+    opacity: .72;
+    scale: 1;
+  }
+
+  50% {
+    filter: blur(.2px) brightness(1.55);
+    opacity: 1;
+    scale: 1.55;
+  }
+}
+
+@keyframes ambient-connection-pulse {
+  from { opacity: .5; }
+  to { opacity: .9; }
+}
+
+@media (max-width: 699px) {
+  .ambient-particle:nth-of-type(n + 15) {
+    display: none;
+  }
+
+  .ambient-connection {
+    stroke-width: .8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-particle,
+  .ambient-connection {
+    animation: none;
+  }
+}

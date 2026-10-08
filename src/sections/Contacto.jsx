@@ -32,7 +32,7 @@ export default function Contacto() {
       if (!response.ok || result?.ok !== true) {
         setStatus({
           type: "error",
-          message: result?.message || "No pudimos enviar el mensaje. Inténtalo nuevamente.",
+          message: result?.message || "No pudimos enviar el mensaje. Probá de nuevo.",
         });
         return;
       }
@@ -42,7 +42,7 @@ export default function Contacto() {
     } catch {
       setStatus({
         type: "error",
-        message: "No se pudo conectar con el servicio. Conservé tu mensaje; inténtalo nuevamente.",
+        message: "No se pudo conectar con el servicio. Tu mensaje sigue en el formulario; probá de nuevo.",
       });
     } finally {
       setIsSubmitting(false);
@@ -54,11 +54,11 @@ export default function Contacto() {
       <div className="contact-copy">
         <p className="eyebrow">04 — Contacto</p>
         <h2 id="contact-title"><span>Contacto</span></h2>
-        <p>Estoy disponible para conversar sobre oportunidades laborales y proyectos.</p>
+        <p>¿Tenés una propuesta o querés charlar sobre una idea? Escribime.</p>
         <div className="contact-options">
           <p className="contact-links-label">También podés encontrarme en</p>
           <nav className="contact-socials" aria-label="Contacto y perfiles">
-            <a aria-label="Email" href="mailto:jngomezcordoba@gmail.com">
+            <a aria-label="Correo electrónico" href="mailto:nicolasgomezz.dev@gmail.com">
               <i aria-hidden="true" className="fa-regular fa-envelope" />
             </a>
             <a
@@ -78,7 +78,6 @@ export default function Contacto() {
               <i aria-hidden="true" className="fa-brands fa-github" />
             </a>
           </nav>
-          <p className="contact-location">Córdoba, Argentina</p>
         </div>
       </div>
       <form aria-busy={isSubmitting} className="contact-form" onSubmit={submitForm}>
@@ -98,7 +97,7 @@ export default function Contacto() {
             />
           </div>
           <div className="contact-field">
-            <label htmlFor="contact-email">Email</label>
+            <label htmlFor="contact-email">Correo electrónico</label>
             <input
               autoComplete="email"
               disabled={isSubmitting}
@@ -113,7 +112,11 @@ export default function Contacto() {
           </div>
           <div className="contact-field contact-field-message">
             <label htmlFor="contact-message">Mensaje</label>
+            <p className="contact-field-hint" id="contact-message-hint">
+              Contame brevemente de qué se trata.
+            </p>
             <textarea
+              aria-describedby="contact-message-hint"
               id="contact-message"
               disabled={isSubmitting}
               maxLength={5000}

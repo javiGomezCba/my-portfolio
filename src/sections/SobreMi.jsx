@@ -35,7 +35,7 @@ export default function SobreMi() {
       <aside className="about-direction" aria-labelledby="about-direction-title">
         <p className="about-copy-label">03 — Dirección</p>
         <div>
-          <h3 id="about-direction-title">Desarrollo web en equipo</h3>
+          <h3 id="about-direction-title">Mi próximo paso</h3>
           <p>{about.direction}</p>
         </div>
       </aside>

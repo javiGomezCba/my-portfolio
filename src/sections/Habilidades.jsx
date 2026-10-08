@@ -141,7 +141,7 @@ export default function Habilidades() {
           <h2 id="skills-title">Habilidades</h2>
         </div>
         <p className="skills-intro">
-          Una base orientada a construir interfaces, integrar servicios y desarrollar aplicaciones web de principio a fin.
+          Tecnologías y prácticas que uso para desarrollar, integrar y mantener aplicaciones web.
         </p>
       </header>
       <div className="skills-grid">

@@ -51,14 +51,18 @@
 }
 
 .scroll-rail-progress-1 {
-  transform: scaleY(.3333);
+  transform: scaleY(.25);
 }
 
 .scroll-rail-progress-2 {
-  transform: scaleY(.6667);
+  transform: scaleY(.5);
 }
 
 .scroll-rail-progress-3 {
+  transform: scaleY(.75);
+}
+
+.scroll-rail-progress-4 {
   transform: scaleY(1);
 }
 

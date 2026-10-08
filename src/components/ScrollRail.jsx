@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./ScrollRail.css";
 
 const sections = [
+  { id: "inicio", label: "Inicio", icon: "home" },
   { id: "sobremi", label: "Sobre mí", icon: "profile" },
   { id: "proyectos", label: "Proyectos", icon: "projects" },
   { id: "habilidades", label: "Habilidades", icon: "code" },
@@ -20,6 +21,12 @@ function SectionIcon({ name }) {
   };
 
   switch (name) {
+    case "home":
+      return (
+        <svg {...sharedProps}>
+          <path d="m3.5 10 8.5-7 8.5 7M5.5 9v11h13V9M9 20v-6h6v6" />
+        </svg>
+      );
     case "profile":
       return (
         <svg {...sharedProps}>
@@ -55,7 +62,7 @@ function SectionIcon({ name }) {
 }
 
 export default function ScrollRail() {
-  const [activeIndex, setActiveIndex] = useState(-1);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     let observer;
@@ -68,21 +75,15 @@ export default function ScrollRail() {
 
     const showHomeState = () => {
       visibleSections.clear();
-      setActiveIndex(-1);
+      setActiveIndex(0);
     };
 
     const handleScroll = () => {
       if (window.scrollY <= 16) {
         returningHome = false;
         showHomeState();
-      } else {
-        if (returningHome && window.location.hash !== "#inicio") {
-          returningHome = false;
-        }
-
-        if (!returningHome && visibleSections.size === 0) {
-          setActiveIndex(-1);
-        }
+      } else if (returningHome && window.location.hash !== "#inicio") {
+        returningHome = false;
       }
     };
 
@@ -125,7 +126,6 @@ export default function ScrollRail() {
           }
 
           if (visibleSections.size === 0) {
-            setActiveIndex(-1);
             return;
           }
 
